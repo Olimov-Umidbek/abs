@@ -8,6 +8,9 @@ services:
       - .abs-db.env
     ports:
       - "5432:5432"
+    volumes:
+#      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     environment:
@@ -29,11 +32,14 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-  abs:
-    image: abs:latest
+  abs-backend:
+    image: abs-backend:latest
     restart: always
     container_name: abs-service
     env_file:
       - .abs.env
+    depends_on:
+      - abs-db
+      - kafka
     ports:
       - "8080:8080"

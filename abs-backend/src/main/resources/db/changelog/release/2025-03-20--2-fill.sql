@@ -4,6 +4,13 @@ INSERT INTO public.users (id,"name",surname,status,balance,"version",created_at,
 	 ('8a42859f-0861-4b1c-9ad3-8e99d25da6de'::uuid,'Sergei','Kochkarin','ACTIVE',600,4,'2025-03-20 11:19:55.788271','2025-03-20 11:19:55.788275'),
 	 ('701b6844-e125-40f8-9040-4ffc786ec0e6'::uuid,'Anton','Davidov','ACTIVE',9300,5,'2025-03-20 11:19:43.497567','2025-03-20 11:19:43.497572');
 
+CREATE TABLE public.transactions_2025_03_17_to_2025_03_23 PARTITION OF public.transactions  FOR VALUES FROM ('2025-03-17 00:00:00') TO ('2025-03-24 00:00:00');
+CREATE TABLE public.transactions_2025_03_24_to_2025_03_30 PARTITION OF public.transactions  FOR VALUES FROM ('2025-03-24 00:00:00') TO ('2025-03-31 00:00:00');
+
+CREATE TABLE public.transaction_histories_2025_03_17_to_2025_03_23 PARTITION OF public.transaction_histories  FOR VALUES FROM ('2025-03-17 00:00:00') TO ('2025-03-24 00:00:00');
+CREATE TABLE public.transaction_histories_2025_03_24_to_2025_03_30 PARTITION OF public.transaction_histories  FOR VALUES FROM ('2025-03-24 00:00:00') TO ('2025-03-31 00:00:00');
+
+
 INSERT INTO public.transactions (id,amount,status,sender_id,receiver_id,created_at,updated_at) VALUES
 	 ('b260f9b8-30dc-4b9a-938f-9054f58ddbe6'::uuid,200,'COMPLETED','701b6844-e125-40f8-9040-4ffc786ec0e6'::uuid,'8a42859f-0861-4b1c-9ad3-8e99d25da6de'::uuid,'2025-03-20 11:20:51.909448','2025-03-20 11:20:52.203438'),
 	 ('5920ccfa-3f21-4b3c-9e45-57f050c275f3'::uuid,500,'COMPLETED','701b6844-e125-40f8-9040-4ffc786ec0e6'::uuid,'69f03a72-ddbd-419c-a97c-db1e8b3a216b'::uuid,'2025-03-20 11:21:18.281127','2025-03-20 11:21:18.36075'),
