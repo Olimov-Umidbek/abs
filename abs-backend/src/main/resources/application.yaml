@@ -37,13 +37,12 @@ spring:
         group-id: retry-group
 
 abs:
-  active-account-limit: 3
   transaction-ttl: 100s
   is-standalone: false
   retry-count: 3
   month-of-keeping-records: 3M
   partition:
     enabled: true
-    cron: '*/10 * * * * *'
+    cron: '0 0 0 ? * SUN'
 log:
   level: INFO

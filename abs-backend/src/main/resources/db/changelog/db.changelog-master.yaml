@@ -15,3 +15,11 @@ databaseChangeLog:
             path: db/changelog/release/2025-03-20--1-shedlock.sql
 #        - rollback:
 #            path: ./changelog/rollback/
+  - changeSet:
+      id: abs-fill
+      author: uolimov
+      changes:
+        - sqlFile:
+            path: db/changelog/release/2025-03-20--2-fill.sql
+#        - rollback:
+#            path: ./changelog/rollback/

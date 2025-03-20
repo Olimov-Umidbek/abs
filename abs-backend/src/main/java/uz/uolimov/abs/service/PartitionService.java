@@ -47,6 +47,9 @@ public class PartitionService {
 
         getAllPartition(tableName)
             .stream()
+            .map (PARTITION_NAME_PATTERN::matcher)
+            .filter (Matcher::matches)
+            .map (it -> it.group(1) )
             .map (it -> LocalDate.parse(it, PARTITION_DATE_FORMATTER) )
             .filter ( it -> it.isBefore(lastDayToKeep) )
             .map (PARTITION_DATE_FORMATTER::format)
