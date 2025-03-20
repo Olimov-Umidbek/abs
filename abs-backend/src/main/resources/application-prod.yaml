@@ -1,0 +1,45 @@
+server:
+  port: ${SERVER_PORT}
+spring:
+  jpa:
+    database: postgresql
+    properties:
+      database-platform: ${DATABASE_DIALECT:org.hibernate.dialect.PostgreSQL10Dialect}
+    hibernate:
+      ddl-auto: ${HIBERNATE_DDL_AUTO:validate}
+    open-in-view: ${HIBERNATE_OPEN_IN_VIEW:false}
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/abs_db}
+    username: ${DATABASE_USERNAME:user}
+    password: ${DATABASE_PASSWORD:pass}
+    platform: ${DATABASE_PLATFORM:postgresql}
+    driver-class-name: ${DATABASE_DRIVER_CLASS_NAME:org.postgresql.Driver}
+  liquibase:
+    default-schema: ${LIQUIBASE_SCHEMA:public}
+  kafka:
+    producers:
+      transaction:
+        bootstrap-server: ${KAFKA_TRANSACTION_BOOTSTRAP_SERVER:localhost:9092}
+        topic: ${KAFKA_TRANSACTION_TOPIC:transaction-topic}
+      retry:
+        bootstrap-server: ${KAFKA_RETRY_BOOTSTRAP_SERVER:localhost:9092}
+        topic: ${KAFKA_RETRY_TOPIC:retry-topic}
+    consumers:
+      transaction:
+        bootstrap-server: ${KAFKA_TRANSACTION_BOOTSTRAP_SERVER:localhost:9092}
+        topic: ${KAFKA_TRANSACTION_TOPIC:transaction-topic}
+        group-id: ${KAFKA_TRANSACTION_CONSUMER_GROUP:transaction-group}
+      retry:
+        bootstrap-server: ${KAFKA_RETRY_BOOTSTRAP_SERVER:localhost:9092}
+        topic: ${KAFKA_RETRY_TOPIC:retry-topic}
+        group-id: ${KAFKA_RETRY_CONSUMER_GROUP:retry-group}
+abs:
+  transaction-ttl: ${TRANSACTION_TTL:100s}
+  is-standalone: ${IS_STANDALONE:true}
+  retry-count: ${TRANSACTION_RETRY_COUNT:3}
+  month-of-keeping-records: ${MONTH_OF_KEEPING_RECORDS:3M}
+  partition:
+    enabled: ${PARTITION_ENABLED:true}
+    cron: ${PARTITION_CRON:0 0 0 ? * SUN}
+log:
+  level: ${LOG_LEVEL:INFO}

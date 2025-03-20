@@ -1,0 +1,49 @@
+spring:
+  name: abs-backend
+  jpa:
+    database: postgresql
+    properties:
+      database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    hibernate:
+      ddl-auto: validate
+    open-in-view: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/abs_db
+    username: user
+    password: pass
+    platform: postgresql
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    default-schema: public
+  kafka:
+    consumer:
+      properties:
+        spring.json.trusted.packages: uz.uolimov.abs.model.dto.kafka
+    producers:
+      transaction:
+        bootstrap-server: localhost:9092
+        topic: transaction-topic
+      retry:
+        bootstrap-server: localhost:9092
+        topic: retry-topic
+    consumers:
+      transaction:
+        bootstrap-server: localhost:9092
+        topic: transaction-topic
+        group-id: transaction-group
+      retry:
+        bootstrap-server: localhost:9092
+        topic: retry-topic
+        group-id: retry-group
+
+abs:
+  active-account-limit: 3
+  transaction-ttl: 100s
+  is-standalone: false
+  retry-count: 3
+  month-of-keeping-records: 3M
+  partition:
+    enabled: true
+    cron: '*/10 * * * * *'
+log:
+  level: INFO
