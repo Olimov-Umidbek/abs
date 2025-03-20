@@ -20,7 +20,7 @@ services:
       - "2181:2181"
   kafka:
     image: confluentinc/cp-kafka:latest
-    container_name: cp-kafka
+    container_name: kafka
     depends_on:
       - zookeeper
     ports:

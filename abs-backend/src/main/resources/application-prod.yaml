@@ -19,18 +19,18 @@ spring:
   kafka:
     producers:
       transaction:
-        bootstrap-server: ${KAFKA_TRANSACTION_BOOTSTRAP_SERVER:localhost:9092}
+        bootstrap-server: ${KAFKA_TRANSACTION_BOOTSTRAP_SERVER}
         topic: ${KAFKA_TRANSACTION_TOPIC:transaction-topic}
       retry:
-        bootstrap-server: ${KAFKA_RETRY_BOOTSTRAP_SERVER:localhost:9092}
+        bootstrap-server: ${KAFKA_RETRY_BOOTSTRAP_SERVER}
         topic: ${KAFKA_RETRY_TOPIC:retry-topic}
     consumers:
       transaction:
-        bootstrap-server: ${KAFKA_TRANSACTION_BOOTSTRAP_SERVER:localhost:9092}
+        bootstrap-server: ${KAFKA_TRANSACTION_BOOTSTRAP_SERVER}
         topic: ${KAFKA_TRANSACTION_TOPIC:transaction-topic}
         group-id: ${KAFKA_TRANSACTION_CONSUMER_GROUP:transaction-group}
       retry:
-        bootstrap-server: ${KAFKA_RETRY_BOOTSTRAP_SERVER:localhost:9092}
+        bootstrap-server: ${KAFKA_RETRY_BOOTSTRAP_SERVER}
         topic: ${KAFKA_RETRY_TOPIC:retry-topic}
         group-id: ${KAFKA_RETRY_CONSUMER_GROUP:retry-group}
 abs:
