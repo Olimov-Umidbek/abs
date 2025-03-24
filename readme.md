@@ -21,23 +21,12 @@ graph TD
 
 ## Steps to run:
 
-+ Build
-
-```shell 
-mvn clean package
-```
-
-+ Build abs-backend docker image
-
-```shell 
-cd abs-backend 
-docker build -t 'abs-backend' . 
-```
-
-+ Run docker compose
-
+Run this script
 ```shell
-cd ..
+docker build -t abs .
+```
+Run docker compose
+```shell
 cd docker
 docker compose up
 ```
